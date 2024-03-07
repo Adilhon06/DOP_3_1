@@ -1,6 +1,5 @@
 import java.util.*
 
-object Main {
     var bossHealth: Int = 900
     var bossDamage: Int = ((10.0 / 100.0) * bossHealth).toInt()
     var bossImmunityType: String? = null
@@ -8,8 +7,7 @@ object Main {
     var heroesHealth: IntArray = intArrayOf(330, 290, 300, 280)
     var heroesDamage: IntArray = intArrayOf(50, 70, 60, 0)
 
-    @JvmStatic
-    fun main(args: Array<String>) {
+    fun main() {
         printStatistics(0)
         var currentRound = 0
         while (!isGameFinished) {
@@ -67,7 +65,6 @@ object Main {
 
     fun heroesHit() {
         for (i in 0 until heroes.size - 1) {
-            // Проверка на то, жив ли герой и жив ли босс
             if (heroesHealth[i] > 0 && bossHealth > 0) {
                 if (heroesHealth[i] <= 100) {
                     val random = Random()
@@ -107,14 +104,11 @@ object Main {
     fun bossHit() {
         for (i in heroesHealth.indices) {
             if (heroesHealth[i] > 0 && bossHealth > 0) {
-                // Проверка на то, метв ли герой после удара босса
                 if (heroesHealth[i] - bossDamage < 0) {
                     heroesHealth[i] = 0
                 } else {
-                    // Если герой жив после удара боса
                     heroesHealth[i] = heroesHealth[i] - bossDamage
                 }
             }
         }
     }
-}
